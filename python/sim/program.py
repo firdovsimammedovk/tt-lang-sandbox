@@ -215,7 +215,9 @@ def Program(*funcs: BindableTemplate, grid: Shape) -> Any:
             if total_l1_bytes > max_l1:
                 warnings.warn(
                     f"Total DataflowBuffer capacity per core ({total_l1_bytes} bytes) "
-                    f"exceeds the L1 memory limit of {max_l1} bytes.",
+                    f"exceeds the L1 memory limit of {max_l1} bytes. "
+                    f"Memory is accounted using declared dtypes, so this reflects "
+                    f"the on-hardware footprint of the kernel.",
                     stacklevel=2,
                 )
 
