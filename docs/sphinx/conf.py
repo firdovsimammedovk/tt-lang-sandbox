@@ -71,7 +71,7 @@ html_last_updated_fmt = "%b %d, %Y"
 
 html_context = {
     "versions": None,
-    "logo_link_url": os.environ.get("homepage", "https://docs.tenstorrent.com/"),
+    "logo_link_url": os.environ.get("homepage", "https://firdovsimammedovk.github.io/tenstorrent-sandbox/"),
 }
 
 
