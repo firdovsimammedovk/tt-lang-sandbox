@@ -2,9 +2,9 @@
 
 TT-Lang is a Python-based domain-specific language for writing custom operations on
 Tenstorrent hardware. It provides an expressive middle ground between
-[TT-NN](https://docs.tenstorrent.com/tt-metal/latest/ttnn/index.html)'s
+[TT-NN](https://firdovsimammedovk.github.io/tt-metal-sandbox/ttnn/index.html)'s
 high-level operations and
-[TT-Metalium](https://docs.tenstorrent.com/tt-metal/latest/tt-metalium/index.html)'s
+[TT-Metalium](https://firdovsimammedovk.github.io/tt-metal-sandbox/tt-metalium/index.html)'s
 low-level hardware control.
 
 The primary use case is kernel fusion for model deployment. Engineers porting
