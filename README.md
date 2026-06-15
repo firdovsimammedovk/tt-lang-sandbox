@@ -2,7 +2,7 @@
 
 <h1>
 
-[Hardware](https://tenstorrent.com/cards/) | [Documentation](https://docs.tenstorrent.com/tt-lang/) | [Discord](https://discord.gg/tenstorrent) | [Join Us](https://job-boards.greenhouse.io/tenstorrent?gh_src=22e462047us) | [Issues](https://github.com/tenstorrent/tt-lang/issues)
+[Hardware](https://tenstorrent.com/cards/) | [Documentation](https://firdovsimammedovk.github.io/tt-lang-sandbox/) | [Discord](https://discord.gg/tenstorrent) | [Join Us](https://job-boards.greenhouse.io/tenstorrent?gh_src=22e462047us) | [Issues](https://github.com/tenstorrent/tt-lang/issues)
 
 </h1>
 
@@ -26,7 +26,7 @@ A Python-based Domain-Specific Language (DSL) for authoring high-performance cus
 
 ## 1. Vision
 
-TT-Lang joins the Tenstorrent software ecosystem as an expressive yet ergonomic middle ground between [TT-NN](https://docs.tenstorrent.com/tt-metal/latest/ttnn/index.html) and [TT-Metalium](https://docs.tenstorrent.com/tt-metal/latest/tt-metalium/index.html), aiming to provide a unified entrypoint with integrated simulation, performance analysis, and AI-assisted development tooling.
+TT-Lang joins the Tenstorrent software ecosystem as an expressive yet ergonomic middle ground between [TT-NN](https://firdovsimammedovk.github.io/tt-metal-sandbox/ttnn/index.html) and [TT-Metalium](https://firdovsimammedovk.github.io/tt-metal-sandbox/tt-metalium/index.html), aiming to provide a unified entrypoint with integrated simulation, performance analysis, and AI-assisted development tooling.
 
 <div align="center">
   <img alt="ecosystem graph" src="docs/public/images/ecosystem-diagram.png" height="360">
