@@ -62,6 +62,25 @@ autosummary_generate = True
 
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
+import subprocess as _sp
+
+def _git_tags() -> list[str]:
+    try:
+        out = _sp.check_output(
+            ["git", "tag", "-l", "v*", "--sort=-version:refname"],
+            stderr=_sp.DEVNULL,
+        ).decode().strip()
+        return [t for t in out.split("\n") if t]
+    except Exception:
+        return []
+
+_LANG_BASE = "https://firdovsimammedovk.github.io/tt-lang-sandbox/"
+_GLOBAL_CSS = "https://firdovsimammedovk.github.io/tenstorrent-sandbox/_static/tt_theme.css"
+_current_version = os.environ.get("DOCS_VERSION", "latest")
+
+_all_versions = ["latest"] + [t for t in _git_tags() if t != "latest"]
+_version_urls = [(v, f"{_LANG_BASE}{v}/") for v in _all_versions]
+
 html_theme = "sphinx_rtd_theme"
 html_logo = _theme_logo
 html_favicon = _theme_favicon
@@ -69,8 +88,15 @@ html_static_path = _theme_static_paths
 templates_path = [_theme_templates]
 html_last_updated_fmt = "%b %d, %Y"
 
+html_baseurl = f"{_LANG_BASE}{_current_version}/"
+version = _current_version
+
+# Load global CSS from tenstorrent-sandbox CDN; local tt_theme.css adds overrides
+html_css_files = [_GLOBAL_CSS]
+
 html_context = {
-    "versions": None,
+    "versions": _version_urls,
+    "current_version": _current_version,
     "logo_link_url": os.environ.get("homepage", "https://firdovsimammedovk.github.io/tenstorrent-sandbox/"),
 }
 

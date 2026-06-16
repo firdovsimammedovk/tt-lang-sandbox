@@ -3,6 +3,7 @@ name: Docs - Build & Deploy
 on:
   push:
     branches: [main]
+    tags: ['v*']
   workflow_dispatch:
 
 permissions:
@@ -20,6 +21,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -34,14 +38,43 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Build Sphinx docs
+      - name: Build versioned docs
         run: |
-          sphinx-build docs/sphinx docs/sphinx/_build/html
+          mkdir -p docs/output
+
+          # Build latest
+          DOCS_VERSION=latest sphinx-build docs/sphinx docs/output/latest
+
+          # Build each git tag
+          for TAG in $(git tag -l 'v*' --sort=-version:refname); do
+            git checkout "$TAG" -- docs/sphinx/
+            DOCS_VERSION="$TAG" sphinx-build docs/sphinx "docs/output/$TAG"
+            git checkout HEAD -- docs/sphinx/
+          done
+
+          # Generate versions.json
+          python - <<'PYEOF'
+          import json, subprocess
+          tags = subprocess.check_output(
+              ["git", "tag", "-l", "v*", "--sort=-version:refname"]
+          ).decode().strip().split("\n")
+          tags = [t for t in tags if t]
+          base = "https://firdovsimammedovk.github.io/tt-lang-sandbox/"
+          versions = [{"name": "latest", "url": f"{base}latest/"}] + [
+              {"name": t, "url": f"{base}{t}/"} for t in tags
+          ]
+          with open("docs/output/versions.json", "w") as f:
+              json.dump({"versions": versions}, f, indent=2)
+          PYEOF
+
+          # Root redirect to latest
+          echo '<meta http-equiv="refresh" content="0; url=latest/">' > docs/output/index.html
+          touch docs/output/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/sphinx/_build/html
+          path: docs/output
 
   deploy:
     environment:
