@@ -34,7 +34,13 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
     "sphinxcontrib.mermaid",
+    "sphinx_reredirects",
 ]
+
+redirects = {
+    "tour/operation-basics": "index.html#operation-basics",
+    "tour/dataflow-buffers": "index.html#dataflow-buffers",
+}
 
 source_suffix = {
     ".rst": "restructuredtext",
@@ -63,6 +69,11 @@ autosummary_generate = True
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 html_theme = "sphinx_rtd_theme"
+html_theme_options = {
+    "collapse_navigation": True,
+    "titles_only": True,
+    "navigation_depth": 2,
+}
 html_logo = _theme_logo
 html_favicon = _theme_favicon
 html_static_path = _theme_static_paths
