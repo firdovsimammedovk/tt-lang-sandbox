@@ -18,6 +18,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: github-pages
     env:
       # OpenSearch-backed docs search ingest (see scripts/index_remote_search.py).
       SEARCH_API_BASE: https://csl860x2oj.execute-api.us-east-2.amazonaws.com/prod
